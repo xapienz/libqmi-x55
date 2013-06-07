@@ -1,8 +1,8 @@
 
 %global glib2_version 2.32.0
 
-%global snapshot .git20130510
-%global realversion 1.3.0
+%global snapshot %{nil}
+%global realversion 1.4.0
 
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
@@ -88,6 +88,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jun  7 2013 Dan Williams <dcbw@redhat.com> - 1.4.0-1
+- Update to 1.4.0 release
+
 * Fri May 10 2013 Dan Williams <dcbw@redhat.com> - 1.3.0-1.git20130510
 - Initial Fedora release
 

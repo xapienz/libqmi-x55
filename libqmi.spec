@@ -1,20 +1,20 @@
 
 %global glib2_version 2.32.0
 
-%global snapshot %{nil}
-%global realversion 1.6.0
+%global realversion 1.8.0
 
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 Version: %{?realversion}
-Release: 1%{snapshot}%{?dist}
+Release: 1%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
-URL: http://www.freedesktop.org/software/libqmi
+URL: http://freedesktop.org/software/libqmi
 
-# If snapshot is defined, source will be a snapshot of git from the
-# master branch on the given date
-Source: %{name}-%{realversion}%{snapshot}.tar.xz
+#
+# Source from http://freedesktop.org/software/libqmi/
+#
+Source: %{name}-%{realversion}.tar.xz
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pkgconfig
@@ -53,9 +53,7 @@ from the command line.
 %setup -q -n %{name}-%{realversion}
 
 %build
-%configure \
-	--disable-static \
-	--with-tests=yes
+%configure --disable-static
 make %{?_smp_mflags}
 
 %install
@@ -86,9 +84,13 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_bindir}/qmicli
 %{_bindir}/qmi-network
 %{_mandir}/man1/*
+%{_libexecdir}/qmi-proxy
 
 
 %changelog
+* Sat Feb  1 2014 poma <poma@gmail.com> - 1.8.0-1
+- Update to 1.8.0 release
+
 * Fri Sep  6 2013 Dan Williams <dcbw@redhat.com> - 1.6.0-1
 - Update to 1.6.0 release
 

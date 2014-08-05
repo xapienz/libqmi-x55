@@ -1,12 +1,12 @@
 
 %global glib2_version 2.32.0
 
-%global realversion 1.8.0
+%global realversion 1.10.2
 
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 Version: %{?realversion}
-Release: 2%{?dist}
+Release: 1%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
@@ -88,6 +88,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Aug  5 2014 Dan Williams <dcbw@redhat.com> - 1.10.2
+- Update to 1.10.2 release
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.8.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 

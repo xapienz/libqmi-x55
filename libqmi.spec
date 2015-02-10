@@ -1,27 +1,14 @@
-
-%global glib2_version 2.32.0
-
-%global realversion 1.12.0
-
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
-Version: %{?realversion}
+Version: 1.12.0
 Release: 1%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
+Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 
-#
-# Source from http://freedesktop.org/software/libqmi/
-#
-Source: %{name}-%{realversion}.tar.xz
-
-BuildRequires: glib2-devel >= %{glib2_version}
-BuildRequires: pkgconfig
-BuildRequires: automake autoconf intltool libtool
+BuildRequires: glib2-devel >= 2.32.0
 BuildRequires: python >= 2.7
-
-Requires: glib2 >= %{glib2_version}
 
 %description
 This package contains the libraries that make it easier to use QMI functionality
@@ -50,11 +37,17 @@ from the command line.
 
 
 %prep
-%setup -q -n %{name}-%{realversion}
+%setup -q
 
 %build
 %configure --disable-static
-make %{?_smp_mflags}
+
+# Uses private copy of libtool:
+# http://fedoraproject.org/wiki/Packaging:Guidelines#Beware_of_Rpath
+sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+
+make %{?_smp_mflags} V=1
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
@@ -64,12 +57,10 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%post   devel -p /sbin/ldconfig
-%postun	devel -p /sbin/ldconfig
-
 
 %files
-%doc COPYING NEWS AUTHORS README
+%doc NEWS AUTHORS README
+%license COPYING
 %{_libdir}/libqmi-glib.so.*
 
 %files devel
@@ -88,6 +79,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Feb 10 2015 Lubomir Rintel <lkundrak@v3.sk>
+- Clean up the spec file a bit
+
 * Thu Jan 15 2015 Dan Williams <dcbw@redhat.com> - 1.12.0-1
 - Update to 1.12.0 release
 

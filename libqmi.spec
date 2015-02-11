@@ -1,6 +1,6 @@
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
-Version: 1.12.2
+Version: 1.12.4
 Release: 1%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
@@ -79,6 +79,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Feb 11 2015 Lubomir Rintel <lkundrak@v3.sk> - 1.12.4-1
+- Update to 1.12.4 release
+
 * Tue Feb 10 2015 Lubomir Rintel <lkundrak@v3.sk> - 1.12.2-1
 - Clean up the spec file a bit
 - Update to 1.12.2 release

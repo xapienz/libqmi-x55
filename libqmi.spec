@@ -1,7 +1,7 @@
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 Version: 1.12.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
@@ -40,6 +40,8 @@ from the command line.
 %setup -q
 
 %build
+# avoid false positives in -Wmisleading-indentation (#1307733)
+CFLAGS="$RPM_OPT_FLAGS -ftabstop=4"
 %configure --disable-static
 
 # Uses private copy of libtool:
@@ -79,6 +81,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 01 2016 Yaakov Selkowitz <yselkowi@redhat.com> - 1.12.6-3
+- Fix FTBFS with GCC 6 (#1307733)
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.12.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 

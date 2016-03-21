@@ -1,7 +1,7 @@
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
-Version: 1.12.6
-Release: 3%{?dist}
+Version: 1.14.0
+Release: 1%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
@@ -40,8 +40,6 @@ from the command line.
 %setup -q
 
 %build
-# avoid false positives in -Wmisleading-indentation (#1307733)
-CFLAGS="$RPM_OPT_FLAGS -ftabstop=4"
 %configure --disable-static
 
 # Uses private copy of libtool:
@@ -64,6 +62,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %doc NEWS AUTHORS README
 %license COPYING
 %{_libdir}/libqmi-glib.so.*
+%{_datadir}/bash-completion
 
 %files devel
 %dir %{_includedir}/libqmi-glib
@@ -81,6 +80,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Mar 21 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.14.0-1
+- Update to 1.14.0 release
+
 * Tue Mar 01 2016 Yaakov Selkowitz <yselkowi@redhat.com> - 1.12.6-3
 - Fix FTBFS with GCC 6 (#1307733)
 

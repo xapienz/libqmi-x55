@@ -9,6 +9,7 @@ Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 
 BuildRequires: glib2-devel >= 2.32.0
 BuildRequires: python >= 2.7
+BuildRequires: gtk-doc
 
 %description
 This package contains the libraries that make it easier to use QMI functionality
@@ -40,18 +41,19 @@ from the command line.
 %setup -q
 
 %build
-%configure --disable-static
+%configure --disable-static --enable-gtk-doc
 
 # Uses private copy of libtool:
 # http://fedoraproject.org/wiki/Packaging:Guidelines#Beware_of_Rpath
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
-make %{?_smp_mflags} V=1
+LD_LIBRARY_PATH="$PWD/src/libqmi-glib/.libs" make %{?_smp_mflags} V=1
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
 %{__rm} -f $RPM_BUILD_ROOT%{_libdir}/*.la
+find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %post	-p /sbin/ldconfig

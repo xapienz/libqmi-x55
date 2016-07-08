@@ -1,6 +1,6 @@
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
-Version: 1.14.2
+Version: 1.16.0
 Release: 1%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
@@ -10,6 +10,7 @@ Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 BuildRequires: glib2-devel >= 2.32.0
 BuildRequires: python >= 2.7
 BuildRequires: gtk-doc
+BuildRequires: libmbim-devel >= 1.14.0
 
 %description
 This package contains the libraries that make it easier to use QMI functionality
@@ -41,7 +42,7 @@ from the command line.
 %setup -q
 
 %build
-%configure --disable-static --enable-gtk-doc
+%configure --disable-static --enable-gtk-doc --enable-mbim-qmux
 
 # Uses private copy of libtool:
 # http://fedoraproject.org/wiki/Packaging:Guidelines#Beware_of_Rpath
@@ -82,6 +83,9 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %changelog
+* Fri Jul 08 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.16.0-1
+- Update to 1.16.0
+
 * Tue May 03 2016 Lubomir Rintel <lkundrak@v3.sk> - 1.14.2-1
 - Update to 1.14.2
 

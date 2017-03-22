@@ -10,6 +10,7 @@ URL: http://freedesktop.org/software/libqmi
 Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 
 BuildRequires: glib2-devel >= 2.32.0
+BuildRequires: libgudev-devel >= 147
 BuildRequires: python >= 2.7
 BuildRequires: gtk-doc
 BuildRequires: libmbim-devel >= 1.14.0

@@ -2,8 +2,8 @@
 
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
-Version: 1.18.0
-Release: 2%{?dist}
+Version: 1.20.0
+Release: 1%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
@@ -87,6 +87,9 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %changelog
+* Mon Jan 22 2018 Lubomir Rintel <lkundrak@v3.sk> - 1.20.0-1
+- Update to 1.18.0
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.18.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 

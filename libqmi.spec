@@ -3,7 +3,7 @@
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 Version: 1.20.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
@@ -12,7 +12,7 @@ Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 BuildRequires: gcc
 BuildRequires: glib2-devel >= 2.32.0
 BuildRequires: libgudev-devel >= 147
-BuildRequires: python >= 2.7
+BuildRequires: python2 >= 2.7
 BuildRequires: gtk-doc
 BuildRequires: libmbim-devel >= 1.14.0
 
@@ -88,6 +88,10 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %changelog
+* Thu Mar 15 2018 Iryna Shcherbina <ishcherb@redhat.com> - 1.20.0-3
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.20.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 

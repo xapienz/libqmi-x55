@@ -2,8 +2,8 @@
 
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
-Version: 1.20.0
-Release: 4%{?dist}
+Version: 1.22.0
+Release: 1%{?dist}
 Group: Development/Libraries
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
@@ -12,9 +12,9 @@ Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 BuildRequires: gcc
 BuildRequires: glib2-devel >= 2.32.0
 BuildRequires: libgudev-devel >= 147
-BuildRequires: python2 >= 2.7
+BuildRequires: python3
 BuildRequires: gtk-doc
-BuildRequires: libmbim-devel >= 1.14.0
+BuildRequires: libmbim-devel >= 1.18.0
 
 %description
 This package contains the libraries that make it easier to use QMI functionality
@@ -88,6 +88,9 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %changelog
+* Tue Jan 15 2019 Lubomir Rintel <lkundrak@v3.sk> - 1.20.0-1
+- Update to 1.22.0
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.20.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
@@ -99,7 +102,7 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
 * Mon Jan 22 2018 Lubomir Rintel <lkundrak@v3.sk> - 1.20.0-1
-- Update to 1.18.0
+- Update to 1.20.0
 
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.18.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild

@@ -4,7 +4,6 @@ Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 Version: 1.22.0
 Release: 1%{?dist}
-Group: Development/Libraries
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
 Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
@@ -23,7 +22,6 @@ from applications that use glib.
 
 %package devel
 Summary: Header files for adding QMI support to applications that use glib
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: glib2-devel
 Requires: pkgconfig

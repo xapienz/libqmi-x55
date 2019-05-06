@@ -2,7 +2,7 @@
 
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
-Version: 1.22.2
+Version: 1.22.4
 Release: 1%{?dist}
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
@@ -85,6 +85,9 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %changelog
+* Mon May 06 2019 Lubomir Rintel <lkundrak@v3.sk> - 1.22.4-1
+- Update to 1.22.4
+
 * Thu Apr 11 2019 Lubomir Rintel <lkundrak@v3.sk> - 1.22.2-1
 - Update to 1.22.2
 

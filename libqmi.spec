@@ -59,7 +59,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
-%ldconfig_scriptlets
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 
 %files

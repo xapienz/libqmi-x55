@@ -10,7 +10,7 @@ Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 
 BuildRequires: gcc
 BuildRequires: glib2-devel >= 2.32.0
-BuildRequires: libgudev-devel >= 147
+BuildRequires: pkgconfig(gudev-1.0) >= 147
 BuildRequires: python3
 BuildRequires: gtk-doc
 BuildRequires: libmbim-devel >= 1.18.0

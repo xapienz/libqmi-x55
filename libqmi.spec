@@ -11,7 +11,11 @@ Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 BuildRequires: gcc
 BuildRequires: glib2-devel >= 2.32.0
 BuildRequires: pkgconfig(gudev-1.0) >= 147
+%if 0%{?rhel} > 0 && 0%{?rhel} < 8
+BuildRequires: python
+%else
 BuildRequires: python3
+%endif
 BuildRequires: gtk-doc
 BuildRequires: libmbim-devel >= 1.18.0
 

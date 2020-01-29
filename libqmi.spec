@@ -3,7 +3,7 @@
 Name: libqmi
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 Version: 1.24.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
 Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
@@ -90,6 +90,9 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %changelog
+* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.24.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Mon Sep 23 2019 Lubomir Rintel <lkundrak@v3.sk> - 1.24.0
 - Update to 1.24.0
 

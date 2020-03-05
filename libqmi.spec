@@ -1,9 +1,9 @@
 %global _hardened_build 1
 
 Name: libqmi
+Version: 1.24.6
+Release: 1%{?dist}
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
-Version: 1.24.0
-Release: 2%{?dist}
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
 Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
@@ -45,7 +45,7 @@ from the command line.
 
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %configure --disable-static --enable-gtk-doc --enable-mbim-qmux
@@ -55,21 +55,20 @@ from the command line.
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
-LD_LIBRARY_PATH="$PWD/src/libqmi-glib/.libs" make %{?_smp_mflags} V=1
+LD_LIBRARY_PATH="$PWD/src/libqmi-glib/.libs" %{make_build}
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
-%{__rm} -f $RPM_BUILD_ROOT%{_libdir}/*.la
+%{make_install}
+find %{buildroot} -type f -name "*.la" -delete
 find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%ldconfig_scriptlets
 
 
 %files
+%license COPYING.LIB
 %doc NEWS AUTHORS README
-%license COPYING
 %{_libdir}/libqmi-glib.so.*
 %{_datadir}/bash-completion
 
@@ -82,6 +81,7 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 %{_datadir}/gtk-doc/html/libqmi-glib/*
 
 %files utils
+%license COPYING
 %{_bindir}/qmicli
 %{_bindir}/qmi-network
 %{_bindir}/qmi-firmware-update
@@ -90,6 +90,10 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %changelog
+* Thu Mar  5 2020 Peter Robinson <pbrobinson@fedoraproject.org> 1.24.6-1
+- Update to 1.24.6
+- Spec cleanups, fix shipped licenses
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.24.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 

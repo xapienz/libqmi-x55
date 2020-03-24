@@ -1,7 +1,7 @@
 %global _hardened_build 1
 
 Name: libqmi
-Version: 1.24.6
+Version: 1.24.8
 Release: 1%{?dist}
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 License: LGPLv2+
@@ -11,11 +11,7 @@ Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 BuildRequires: gcc
 BuildRequires: glib2-devel >= 2.32.0
 BuildRequires: pkgconfig(gudev-1.0) >= 147
-%if 0%{?rhel} > 0 && 0%{?rhel} < 8
-BuildRequires: python
-%else
 BuildRequires: python3
-%endif
 BuildRequires: gtk-doc
 BuildRequires: libmbim-devel >= 1.18.0
 
@@ -34,6 +30,7 @@ Requires: pkgconfig
 This package contains the header and pkg-config files for development
 applications using QMI functionality from applications that use glib.
 
+
 %package utils
 Summary: Utilities to use the QMI protocol from the command line
 Requires: %{name}%{?_isa} = %{version}-%{release}
@@ -47,6 +44,7 @@ from the command line.
 %prep
 %autosetup -p1
 
+
 %build
 %configure --disable-static --enable-gtk-doc --enable-mbim-qmux
 
@@ -55,11 +53,12 @@ from the command line.
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
+# Without rpath, the GI toolings need a little help to find libqmi-glib.so.*
 LD_LIBRARY_PATH="$PWD/src/libqmi-glib/.libs" %{make_build}
 
+
 %install
-%{make_install}
-find %{buildroot} -type f -name "*.la" -delete
+%make_install
 find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
@@ -67,10 +66,12 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %files
+%{_libdir}/libqmi-glib.so.*
+%exclude %{_libdir}/libqmi-glib.la
+%{_datadir}/bash-completion
 %license COPYING.LIB
 %doc NEWS AUTHORS README
-%{_libdir}/libqmi-glib.so.*
-%{_datadir}/bash-completion
+
 
 %files devel
 %dir %{_includedir}/libqmi-glib
@@ -80,16 +81,20 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 %dir %{_datadir}/gtk-doc/html/libqmi-glib
 %{_datadir}/gtk-doc/html/libqmi-glib/*
 
+
 %files utils
-%license COPYING
 %{_bindir}/qmicli
 %{_bindir}/qmi-network
 %{_bindir}/qmi-firmware-update
 %{_mandir}/man1/*
 %{_libexecdir}/qmi-proxy
+%license COPYING
 
 
 %changelog
+* Tue Mar 24 2020 Lubomir Rintel <lkundrak@v3.sk> - 1.24.8
+- Update to 1.24.8
+
 * Thu Mar  5 2020 Peter Robinson <pbrobinson@fedoraproject.org> 1.24.6-1
 - Update to 1.24.6
 - Spec cleanups, fix shipped licenses

@@ -1,7 +1,7 @@
 %global _hardened_build 1
 
 Name: libqmi
-Version: 1.26.2
+Version: 1.26.4
 Release: 1%{?dist}
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 License: LGPLv2+
@@ -92,6 +92,9 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %changelog
+* Fri Aug 28 2020 Peter Robinson <pbrobinson@fedoraproject.org> - 1.26.4-1
+- Update to 1.26.4
+
 * Mon Jul 27 2020 Peter Robinson <pbrobinson@fedoraproject.org>
 - Update to 1.26.2
 

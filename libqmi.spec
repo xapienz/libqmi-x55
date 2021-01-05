@@ -14,6 +14,7 @@ BuildRequires: pkgconfig(gudev-1.0) >= 147
 BuildRequires: python3
 BuildRequires: gtk-doc
 BuildRequires: libmbim-devel >= 1.18.0
+BuildRequires: make
 
 %description
 This package contains the libraries that make it easier to use QMI functionality

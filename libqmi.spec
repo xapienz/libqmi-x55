@@ -1,7 +1,5 @@
-%global _hardened_build 1
-
 Name: libqmi
-Version: 1.26.6
+Version: 1.26.8
 Release: 1%{?dist}
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 License: LGPLv2+
@@ -10,11 +8,11 @@ Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 
 BuildRequires: gcc
 BuildRequires: glib2-devel >= 2.48.0
-BuildRequires: pkgconfig(gudev-1.0) >= 147
-BuildRequires: python3
 BuildRequires: gtk-doc
+BuildRequires: pkgconfig(gudev-1.0) >= 147
 BuildRequires: libmbim-devel >= 1.18.0
 BuildRequires: make
+BuildRequires: python3
 
 %description
 This package contains the libraries that make it easier to use QMI functionality
@@ -67,11 +65,11 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %files
+%license COPYING.LIB
+%doc NEWS AUTHORS README
 %{_libdir}/libqmi-glib.so.*
 %exclude %{_libdir}/libqmi-glib.la
 %{_datadir}/bash-completion
-%license COPYING.LIB
-%doc NEWS AUTHORS README
 
 
 %files devel
@@ -93,7 +91,10 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 
 
 %changelog
-* Tue Nov  3 16:09:15 GMT 2020 Peter Robinson <pbrobinson@fedoraproject.org> - 1.26.6-1
+* Sat Jan 16 2021 Peter Robinson <pbrobinson@fedoraproject.org> - 1.26.8-1
+- Update to 1.26.8
+
+* Tue Nov  3 2020 Peter Robinson <pbrobinson@fedoraproject.org> - 1.26.6-1
 - Update to 1.26.6
 
 * Fri Aug 28 2020 Peter Robinson <pbrobinson@fedoraproject.org> - 1.26.4-1

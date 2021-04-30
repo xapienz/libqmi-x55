@@ -1,6 +1,6 @@
 Name: libqmi
-Version: 1.26.8
-Release: 2%{?dist}
+Version: 1.28.2
+Release: 1%{?dist}
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
@@ -8,9 +8,11 @@ Source: http://freedesktop.org/software/libqmi/%{name}-%{version}.tar.xz
 
 BuildRequires: gcc
 BuildRequires: glib2-devel >= 2.48.0
+BuildRequires: gobject-introspection-devel
 BuildRequires: gtk-doc
 BuildRequires: pkgconfig(gudev-1.0) >= 147
 BuildRequires: libmbim-devel >= 1.18.0
+BuildRequires: libqrtr-glib-devel
 BuildRequires: make
 BuildRequires: python3
 
@@ -46,19 +48,13 @@ from the command line.
 
 %build
 %configure --disable-static --enable-gtk-doc --enable-mbim-qmux
-
-# Uses private copy of libtool:
-# http://fedoraproject.org/wiki/Packaging:Guidelines#Beware_of_Rpath
-sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
-
-# Without rpath, the GI toolings need a little help to find libqmi-glib.so.*
-LD_LIBRARY_PATH="$PWD/src/libqmi-glib/.libs" %{make_build}
+%{make_build} V=1
 
 
 %install
 %make_install
 find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
+find %{buildroot} -type f -name "*.la" -delete
 
 
 %ldconfig_scriptlets
@@ -68,29 +64,31 @@ find %{buildroot}%{_datadir}/gtk-doc |xargs touch --reference configure.ac
 %license COPYING.LIB
 %doc NEWS AUTHORS README
 %{_libdir}/libqmi-glib.so.*
-%exclude %{_libdir}/libqmi-glib.la
-%{_datadir}/bash-completion
+%{_libdir}/girepository-1.0/Qmi-1.0.typelib
 
 
 %files devel
-%dir %{_includedir}/libqmi-glib
-%{_includedir}/libqmi-glib/*.h
+%{_includedir}/libqmi-glib/
 %{_libdir}/pkgconfig/qmi-glib.pc
 %{_libdir}/libqmi-glib.so
-%dir %{_datadir}/gtk-doc/html/libqmi-glib
-%{_datadir}/gtk-doc/html/libqmi-glib/*
+%{_datadir}/gtk-doc/html/libqmi-glib/
+%{_datadir}/gir-1.0/Qmi-1.0.gir
 
 
 %files utils
+%license COPYING
 %{_bindir}/qmicli
 %{_bindir}/qmi-network
 %{_bindir}/qmi-firmware-update
-%{_mandir}/man1/*
+%{_datadir}/bash-completion
 %{_libexecdir}/qmi-proxy
-%license COPYING
+%{_mandir}/man1/*
 
 
 %changelog
+* Tue Apr 13 2021 Peter Robinson <pbrobinson@fedoraproject.org> - 1.28.2-1
+- Update to 1.28.2
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.26.8-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 

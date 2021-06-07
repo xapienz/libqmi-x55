@@ -1,6 +1,6 @@
 Name: libqmi
 Version: 1.28.6
-Release: 1%{?d0st}
+Release: 1%{?dist}
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi

@@ -1,6 +1,6 @@
 Name: libqmi
-Version: 1.28.6
-Release: 2%{?dist}
+Version: 1.28.8
+Release: 1%{?dist}
 Summary: Support library to use the Qualcomm MSM Interface (QMI) protocol
 License: LGPLv2+
 URL: http://freedesktop.org/software/libqmi
@@ -86,6 +86,9 @@ find %{buildroot} -type f -name "*.la" -delete
 
 
 %changelog
+* Wed Aug 04 2021 Peter Robinson <pbrobinson@fedoraproject.org> - 1.28.8-1
+- Update to 1.28.8
+
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.28.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
